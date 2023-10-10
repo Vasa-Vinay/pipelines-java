@@ -14,12 +14,6 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
 - task: CopyFiles@2
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
   inputs:
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)/terraform'
@@ -30,3 +24,9 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
